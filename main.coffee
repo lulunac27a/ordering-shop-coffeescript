@@ -12,12 +12,16 @@ window.addOrder = ->
 	updateList()
 
 updateList = ->
-	html = '<table><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Total</th></tr>'
-	orders.forEach (order) ->
+	html = '<table><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Total</th><th></th></tr>'
+	orders.forEach (order, i) ->
 		html += '<tr><td>' + order.name + '</td>'
 		html += '<td>' + order.quantity + '</td>'
 		html += '<td>' + order.price.toFixed(2) + '</td>'
-		html += '<td>' + (order.quantity * order.price).toFixed(2) + '</td></tr>'
+		html += '<td>' + (order.quantity * order.price).toFixed(2) + '</td>'
+		html += '<td><button onclick="deleteOrder(' + i + ')">Delete</button></td></tr>'
 	html += '</table>'
 	orderList.innerHTML = html
 
+window.deleteOrder = (i) ->
+	orders.splice(i, 1)
+	updateList()
