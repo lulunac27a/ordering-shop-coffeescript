@@ -20,10 +20,10 @@ updateList = ->
 	orders.forEach (order, i) ->
 		html += '<tr><td>' + order.name + '</td>'
 		html += '<td>' + order.quantity + '</td>'
-		html += '<td>' + order.price.toFixed(2) + '</td>'
-		html += '<td>' + (order.quantity * order.price).toFixed(2) + '</td>'
+		html += '<td>$' + order.price.toFixed(2) + '</td>'
+		html += '<td>$' + (order.quantity * order.price).toFixed(2) + '</td>'
 		html += '<td><button onclick="deleteOrder(' + i + ')">Delete</button></td></tr>'
-	html += '<tr><td colspan="3"></td><td>Total: ' + total.toFixed(2) + '</td><td></td></tr>'
+	html += '<tr><td colspan="3"></td><td>Total: $' + total.toFixed(2) + '</td><td></td></tr>'
 	html += '</table>'
 	orderList.innerHTML = html
 
