@@ -1,15 +1,15 @@
-names = document.getElementById("name")
-quantity = document.getElementById("quantity")
-price = document.getElementById("price")
-orderList = document.getElementById("orders")
+names = document.getElementById "name"
+quantity = document.getElementById "quantity"
+price = document.getElementById "price"
+orderList = document.getElementById "orders"
 orders = []
 
 window.addOrder = ->
-	if (names.value and not isNaN(parseInt(quantity.value))) and not isNaN(parseFloat(price.value))
+	if (names.value and not isNaN parseInt quantity.value) and not isNaN parseFloat price.value
 		orders.push
 			names: names.value
-			quantity: parseInt(quantity.value)
-			price: parseFloat(price.value)
+			quantity: parseInt quantity.value 
+			price: parseFloat price.value
 		names.value = ''
 		quantity.value = ''
 		price.value = ''
@@ -32,7 +32,7 @@ updateList = ->
 	orderList.innerHTML = html
 
 window.deleteOrder = (i) ->
-	orders.splice(i, 1)
+	orders.splice i, 1
 	updateList()
 
 
