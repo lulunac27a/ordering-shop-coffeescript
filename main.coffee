@@ -5,7 +5,7 @@ orderList = document.getElementById("orders")
 orders = []
 
 window.addOrder = ->
-	if (not not names.value and not isNaN(parseInt(quantity.value))) and not isNaN(parseFloat(price.value))
+	if (names.value and not isNaN(parseInt(quantity.value))) and not isNaN(parseFloat(price.value))
 		orders.push
 			names: names.value
 			quantity: parseInt(quantity.value)
