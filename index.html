@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+    <title>Ordering Shop</title>
+</head>
+<body>
+    <h1>Ordering Shop</h1>
+    Name:
+    <input type="text" id="name" required/><br/>
+    Quantity:
+    <input type="number" min="0" step="1" id="quantity" required/><br/>
+    Price:
+    <input type="number" min="0" step="0.01" id="price" required/><br/>
+    <button onclick="addOrder()">Add Order</button>
+    <div id="orders"></div>
+    <script src="main.js"></script>
+</body>
