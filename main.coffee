@@ -1,15 +1,19 @@
-name = document.getElementById("name")
+names = document.getElementById("name")
 quantity = document.getElementById("quantity")
 price = document.getElementById("price")
 orderList = document.getElementById("orders")
 orders = []
 
 window.addOrder = ->
-	orders.push
-		name: name.value
-		quantity: parseInt(quantity.value)
-		price: parseFloat(price.value)
-	updateList()
+	if (not not names.value and not isNaN(parseInt(quantity.value))) and not isNaN(parseFloat(price.value))
+		orders.push
+			names: names.value
+			quantity: parseInt(quantity.value)
+			price: parseFloat(price.value)
+		names.value = ''
+		quantity.value = ''
+		price.value = ''
+		updateList()
 
 updateList = ->
 	total = orders.reduce (totalPrice, order) ->
@@ -18,7 +22,7 @@ updateList = ->
 
 	html = '<table><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Total</th><th></th></tr>'
 	orders.forEach (order, i) ->
-		html += '<tr><td>' + order.name + '</td>'
+		html += '<tr><td>' + order.names + '</td>'
 		html += '<td>' + order.quantity + '</td>'
 		html += '<td>$' + order.price.toFixed(2) + '</td>'
 		html += '<td>$' + (order.quantity * order.price).toFixed(2) + '</td>'
