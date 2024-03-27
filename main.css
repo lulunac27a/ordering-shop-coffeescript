@@ -1,0 +1,4 @@
+body {
+  font-family: system-ui;
+  font-variant-numeric: tabular-nums; /*make all numbers the same width*/
+}
