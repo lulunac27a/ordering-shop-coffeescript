@@ -9,7 +9,7 @@ window.addOrder = ->
 		orders.push #add order to list of orders
 			names: names.value
 			quantity: parseInt quantity.value 
-			price: parseFloat price.value
+			price: (parseInt price.value * 100) / 100
 		names.value = ''
 		quantity.value = ''
 		price.value = ''
@@ -24,10 +24,10 @@ updateList = ->
 	orders.forEach (order, i) ->
 		html += '<tr><td>' + order.names + '</td>'
 		html += '<td style="text-align: right;">' + order.quantity + '</td>'
-		html += '<td style="text-align: right;">$' + order.price.toFixed(2) + '</td>'
-		html += '<td style="text-align: right;">$' + (order.quantity * order.price).toFixed(2) + '</td>'
+		html += '<td style="text-align: right;">$' + order.price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</td>'
+		html += '<td style="text-align: right;">$' + (order.quantity * order.price).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</td>'
 		html += '<td><button onclick="deleteOrder(' + i + ')">Delete</button></td></tr>'
-	html += '<tr><td colspan="3"></td><td style="text-align: right;">Total: $' + total.toFixed(2) + '</td><td></td></tr>'
+	html += '<tr><td colspan="3"></td><td style="text-align: right;">Total: $' + total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</td><td></td></tr>'
 	html += '</table>'
 	orderList.innerHTML = html #set order list HTML output
 
