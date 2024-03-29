@@ -2,13 +2,13 @@
   "name": "ordering-shop-coffeescript",
   "version": "1.2.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
     "build": "coffee --compile --map main.coffee"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "coffeescript": "2.7.0"
   }
