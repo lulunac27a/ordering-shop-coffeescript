@@ -1,8 +1,8 @@
-names = document.getElementById "name"
-quantity = document.getElementById "quantity"
-price = document.getElementById "price"
-tax = document.getElementById "tax"
-orderList = document.getElementById "orders"
+names = document.getElementById "name" #order name
+quantity = document.getElementById "quantity" #order quantity
+price = document.getElementById "price" #order price
+tax = document.getElementById "tax" #order tax in percent
+orderList = document.getElementById "orders" #list of orders
 orders = []
 
 window.addOrder = ->
@@ -12,7 +12,7 @@ window.addOrder = ->
 			quantity: parseInt quantity.value 
 			price: (parseInt price.value * 100) / 100
 			tax: (parseInt tax.value * 100) / 100
-		names.value = ''
+		names.value = '' #set all input values to blank (empty text)
 		quantity.value = ''
 		price.value = ''
 		tax.value = ''
