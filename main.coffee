@@ -36,7 +36,8 @@ updateList = ->
 	orderList.innerHTML = html #set order list HTML output
 
 window.deleteOrder = (i) ->
-	orders.splice i, 1 #remove order from index i
-	updateList()
+	if confirm 'Are you sure you want to delete this task named ' + orders[i].names + '?'
+		orders.splice i, 1 #remove order from index i
+		updateList()
 
 
