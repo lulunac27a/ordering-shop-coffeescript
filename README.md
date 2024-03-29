@@ -5,7 +5,7 @@ This is a ordering shop written in CoffeeScript. Features include ordering infor
 ### Getting Started
 
 ```
-git clone https://github.com/lulunac27a/ordering--shop-coffeescript.git
+git clone https://github.com/lulunac27a/ordering-shop-coffeescript.git
 npm install coffee -g
 npm run build
 ```
