@@ -31,47 +31,93 @@ updateList = ->
         0
     )
 
-    html =
-        '<table><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Tax</th><th>Total</th><th></th></tr>' #set HTML content output for all order records
+    #build table using DOM APIs (avoid innerHTML for safety)
+    table = document.createElement 'table'
+    #header
+    head = document.createElement 'thead'
+    headerRow = document.createElement 'tr'
+    for header in ['Name', 'Quantity', 'Price', 'Tax', 'Total', '']
+        th = document.createElement 'th'
+        th.textContent = header #set HTML content output for all order records
+        headerRow.appendChild th
+    head.appendChild headerRow
+    table.appendChild head
+
+    #body rows
+    tbody = document.createElement 'tbody'
     orders.forEach (order, i) ->
-        html += '<tr><td>' + order.names + '</td>'
-        html += '<td style="text-align: right;">' + order.quantity + '</td>'
-        html +=
-            '<td style="text-align: right;">$' +
-            order.price.toLocaleString(
-                'en-US'
+        tr = document.createElement 'tr'
+
+        #name
+        tdName = document.createElement 'td'
+        tdName.textContent = order.names
+        tr.appendChild tdName
+
+        #quantity
+        tdQty = document.createElement 'td'
+        tdQty.style.textAlign = 'right'
+        tdQty.textContent = order.quantity
+        tr.appendChild tdQty
+
+        #price
+        tdPrice = document.createElement 'td'
+        tdPrice.style.textAlign = 'right'
+        tdPrice.textContent =
+            '$' +
+            order.price.toLocaleString 'en-US',
                 minimumFractionDigits: 2, maximumFractionDigits: 2
-            ) +
-            '</td>'
-        html +=
-            '<td style="text-align: right;">' +
+        tr.appendChild tdPrice
+
+        #tax
+        tdTax = document.createElement 'td'
+        tdTax.style.textAlign = 'right'
+        tdTax.textContent =
             order.tax.toLocaleString(
                 'en-US'
                 minimumFractionDigits: 2, maximumFractionDigits: 2
-            ) +
-            '%</td>'
-        html +=
-            '<td style="text-align: right;">$' +
+            ) + '%'
+        tr.appendChild tdTax
+
+        #total
+        tdTotal = document.createElement 'td'
+        tdTotal.style.textAlign = 'right'
+        tdTotal.textContent =
+            '$' +
             (order.quantity *
                 order.price *
-                (1 + order.tax / 100)).toLocaleString(
-                'en-US'
+                (1 + order.tax / 100)).toLocaleString 'en-US',
                 minimumFractionDigits: 2, maximumFractionDigits: 2
-            ) +
-            '</td>'
-        html +=
-            '<td><button onclick="deleteOrder(' +
-            i +
-            ')">Delete</button></td></tr>'
-    html +=
-        '<tr><td colspan="4"></td><td style="text-align: right;">Total: $' +
-        total.toLocaleString(
-            'en-US'
+        tr.appendChild tdTotal
+
+        #delete button
+        tdBtn = document.createElement 'td'
+        btn = document.createElement 'button'
+        btn.textContent = 'Delete'
+        btn.addEventListener 'click', -> window.deleteOrder i
+        tdBtn.appendChild btn
+        tr.appendChild tdBtn
+
+        tbody.appendChild tr
+
+    #total row
+    totalRow = document.createElement 'tr'
+    tdEmpty = document.createElement 'td'
+    tdEmpty.setAttribute 'colspan', '4'
+    totalRow.appendChild tdEmpty
+    tdTotalLabel = document.createElement 'td'
+    tdTotalLabel.style.textAlign = 'right'
+    tdTotalLabel.textContent =
+        'Total: $' +
+        total.toLocaleString 'en-US',
             minimumFractionDigits: 2, maximumFractionDigits: 2
-        ) +
-        '</td><td></td></tr>'
-    html += '</table>'
-    orderList.innerHTML = html #set order list HTML output
+    totalRow.appendChild tdTotalLabel
+    totalRow.appendChild document.createElement 'td'
+    tbody.appendChild totalRow
+
+    table.appendChild tbody
+
+    #replace previous content safely without using innerHTML
+    orderList.replaceChildren table #set order list DOM output
 
 window.deleteOrder = (i) ->
     if confirm(
