@@ -5,11 +5,13 @@ tax = document.getElementById 'tax' #order tax in percent
 orderList = document.getElementById 'orders' #list of orders
 orders = [] #orders array
 
-window.addOrder = ->
+window.addOrder = ->#function to add order to list
+
+
     if (
         names.value and
         not isNaN(parseInt quantity.value) and
-        (not isNaN(parseFloat price.value) and not isNaN parseFloat tax.value) #make sure all inputs are valid
+        (not isNaN(parseFloat price.value) and not isNaN parseFloat tax.value) #check to make sure all inputs are valid
     )
         orders.push
             #add order to list of orders
@@ -23,10 +25,12 @@ window.addOrder = ->
         tax.value = ''
         updateList() #update order list for each record
 
-updateList = ->
+updateList = ->#function to update order list
+
+
     total = orders.reduce(
         (totalPrice, order) ->
-            totalPrice + order.quantity * order.price * (1 + order.tax / 100)
+            totalPrice + order.quantity * order.price * (1 + order.tax / 100) #calculate total price
     ,
         0
     )
@@ -119,7 +123,9 @@ updateList = ->
     #replace previous content safely without using innerHTML
     orderList.replaceChildren table #set order list DOM output
 
-window.deleteOrder = (i) ->
+window.deleteOrder = (
+    i #function to delete order from list
+) ->
     if confirm(
         'Are you sure you want to delete this task named ' +
             orders[i].names +
